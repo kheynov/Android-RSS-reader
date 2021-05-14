@@ -33,7 +33,8 @@ local.properties
                         
 # Windows thumbnail db
 Thumbs.db
-                
+androidTest\
+test\                
 # OSX files
 .DS_Store
                             
