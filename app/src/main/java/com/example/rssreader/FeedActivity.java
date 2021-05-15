@@ -31,12 +31,13 @@ public class FeedActivity extends AppCompatActivity {
 
     ArrayList<ListItem> listItems = new ArrayList<>();
 
-    String URL = "https://rss.stopgame.ru/rss_news.xml";
+    String URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        URL = getIntent().getExtras().get("URL").toString();
         updatingText = findViewById(R.id.updatingText);
         progressBar = findViewById(R.id.progressBar);
         feedList = findViewById(R.id.feed_list);
@@ -47,6 +48,7 @@ public class FeedActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            Log.d("INFO", "Starting XML downloading...");
             progressBar.setVisibility(ProgressBar.VISIBLE);
             updatingText.setVisibility(TextView.VISIBLE);
             feedList.setVisibility(ListView.INVISIBLE);
@@ -89,8 +91,6 @@ public class FeedActivity extends AppCompatActivity {
                     feedList.setOnItemClickListener((parent, view, position, id) -> {
                         final ListItem listItem = listItems.get(position);
                         //TODO: добавить обработку нажатий на новость
-                        Log.d("INFO", "Currency Preferences saved");
-                        finish();
                     });
                     progressBar.setVisibility(ProgressBar.INVISIBLE);
                     updatingText.setVisibility(TextView.INVISIBLE);
