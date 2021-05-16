@@ -31,7 +31,6 @@ public class FeedActivity extends AppCompatActivity {
     NodeList nodeList;
 
     ArrayList<ListItem> listItems = new ArrayList<>();
-
     String URL;
 
     @Override
