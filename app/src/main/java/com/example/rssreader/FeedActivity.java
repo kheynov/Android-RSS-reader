@@ -67,7 +67,7 @@ public class FeedActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if (BuildConfig.DEBUG) Log.d("INFO", "Starting XML downloading");
+//            if (BuildConfig.DEBUG) Log.d("INFO", "Starting XML downloading");
             progressBar.setVisibility(ProgressBar.VISIBLE);
             updatingText.setVisibility(TextView.VISIBLE);//Hiding list and showing progress bar
             feedList.setVisibility(ListView.INVISIBLE);
@@ -81,11 +81,11 @@ public class FeedActivity extends AppCompatActivity {
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
                 Document doc = documentBuilder.parse(new InputSource(url.openStream()));
-                if (BuildConfig.DEBUG) Log.d("INFO", "document loaded");
+//                if (BuildConfig.DEBUG) Log.d("INFO", "document loaded");
                 nodeList = doc.getElementsByTagName("item");//collecting all elements with tag "item"
-                if (BuildConfig.DEBUG) Log.d("NODELIST LENGTH", Integer.toString(nodeList.getLength()));
+//                if (BuildConfig.DEBUG) Log.d("NODELIST LENGTH", Integer.toString(nodeList.getLength()));
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) Log.e("ERROR", e.getLocalizedMessage());
+//                if (BuildConfig.DEBUG) Log.e("ERROR", e.getLocalizedMessage());
             }
             return null;
         }
@@ -124,7 +124,7 @@ public class FeedActivity extends AppCompatActivity {
 
     void openURI(String URL) {
         Uri uri = Uri.parse(URL);
-        if (BuildConfig.DEBUG) Log.d("INFO", "Opening URL: " + URL);
+//        if (BuildConfig.DEBUG) Log.d("INFO", "Opening URL: " + URL);
         Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(openLinkIntent);
     }
