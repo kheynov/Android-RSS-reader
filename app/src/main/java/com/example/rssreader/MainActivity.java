@@ -19,13 +19,10 @@ public class MainActivity extends AppCompatActivity {
         rss_channel =  findViewById(R.id.rss_channel_edit_text);
         button_load = findViewById(R.id.load_news_button);
 
-        button_load.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FeedActivity.class);
-                intent.putExtra("URL", rss_channel.getText());
-                startActivity(intent);
-            }
+        button_load.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, FeedActivity.class);
+            intent.putExtra("URL", rss_channel.getText());
+            startActivity(intent);
         });
     }
 }

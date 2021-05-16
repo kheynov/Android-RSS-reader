@@ -1,7 +1,7 @@
 package com.example.rssreader;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,13 +9,14 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -43,7 +44,8 @@ public class FeedActivity extends AppCompatActivity {
         feedList = findViewById(R.id.feed_list);
         new DownloadRSS().execute(URL);
     }
-    private class DownloadRSS extends AsyncTask<String, Void, Void>{
+
+    private class DownloadRSS extends AsyncTask<String, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -62,9 +64,7 @@ public class FeedActivity extends AppCompatActivity {
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
                 Document doc = documentBuilder.parse(new InputSource(url.openStream()));
-//                doc.getDocumentElement().normalize();
                 Log.d("INFO", "document loaded");
-                Log.d("DOC", doc.toString());
                 nodeList = doc.getElementsByTagName("item");
                 Log.d("NODELIST LENGTH", Integer.toString(nodeList.getLength()));
             } catch (Exception e) {
@@ -81,16 +81,15 @@ public class FeedActivity extends AppCompatActivity {
                 Node node = nodeList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-                    Log.d("DOC ELEMENT", element.toString());
                     listItems.add(new ListItem(getNode("title", element),
                             getNode("pubDate", element),
-                            getNode("description", element)));
-                    Log.i("GET LIST OF ITEMS", listItems.toString());
+                            getNode("description", element),
+                            getNode("link", element)));
                     ListItemAdapter listAdapter = new ListItemAdapter(getApplicationContext(), listItems);
                     feedList.setAdapter(listAdapter);
                     feedList.setOnItemClickListener((parent, view, position, id) -> {
                         final ListItem listItem = listItems.get(position);
-                        //TODO: добавить обработку нажатий на новость
+                        openURI(listItem.getLink());
                     });
                     progressBar.setVisibility(ProgressBar.INVISIBLE);
                     updatingText.setVisibility(TextView.INVISIBLE);
@@ -98,10 +97,18 @@ public class FeedActivity extends AppCompatActivity {
                 }
             }
         }
+
         private String getNode(String tag, Element element) {
             NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
             Node value = nodeList.item(0);
             return value.getNodeValue();
         }
+    }
+
+    void openURI(String URL) {
+        Uri uri = Uri.parse(URL);
+        Log.d("INFO", "Opening URL: " + URL);
+        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(openLinkIntent);
     }
 }
