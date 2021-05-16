@@ -5,10 +5,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.w3c.dom.Document;
@@ -42,6 +45,18 @@ public class FeedActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         feedList = findViewById(R.id.feed_list);
         new DownloadRSS().execute(URL);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_refresh) new DownloadRSS().execute(URL);
+        return true;
     }
 
     private class DownloadRSS extends AsyncTask<String, Void, Void> {
