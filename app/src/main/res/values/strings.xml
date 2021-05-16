@@ -3,4 +3,5 @@
     <string name="enter_rss_channel">Введите ссылку на RSS канал</string>
     <string name="load_news">Загрузить</string>
     <string name="updating_text">Обновляем ленту</string>
+    <string name="enter_valid_url">Введите действительный адрес</string>
 </resources>
