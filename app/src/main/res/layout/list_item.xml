@@ -2,34 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@drawable/list_item_background"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textTitle"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:padding="12dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/list_item_background"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Title"
-        android:textColor="@color/color_text_primary"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textPubDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:textColor="@color/color_text_secondary"
-        android:textSize="12sp" />
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Title"
+            android:textColor="@color/color_text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:text="Content"
-        android:textColor="@color/color_text_primary"
-        android:textSize="14sp" />
+        <TextView
+
+            android:id="@+id/textPubDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textColor="@color/color_text_secondary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="Content"
+            android:textColor="@color/color_text_primary"
+            android:textSize="14sp" />
+    </LinearLayout>
 </LinearLayout>
